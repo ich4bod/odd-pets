@@ -181,34 +181,57 @@ main {
     text-align: center;
 }
 
-/* Pet tile */
-.pet-tile {
-    background-color: var(--card-bg);
-    border: 1px solid var(--card-outline);
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 8px;
-}
-
-.pet-tile h4 {
-    margin: 0;
-    font-size: 1.25rem;
-}
-
-.pet-tile .pet-meta {
-    color: var(--muted-color);
-    font-size: 0.875rem;
-    margin: 0.25rem 0;
-}
-
-.pet-tile .pet-phrase {
-    font-size: 0.875rem;
+.pet-care-strip {
+    background-color: #F3E9D7;
+    padding: 0.75rem;
     margin: 0.5rem 0;
+    border-radius: 4px;
+    text-align: center;
 }
 
-.pet-tile .pet-date {
+.pet-care-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    color: var(--muted-color);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.pet-care-prompt {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+.pet-care-result {
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+}
+
+.pet-care-count {
     font-size: 0.75rem;
     color: var(--muted-color);
+    margin-bottom: 0.5rem;
+}
+
+.pet-care-btn {
+    background-color: var(--ink-color);
+    color: var(--bg-color);
+    border: none;
+    border-radius: 10px;
+    padding: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    height: 44px;
+    min-width: 120px;
+    width: 100%;
+}
+
+.pet-care-btn:focus {
+    outline: 3px solid currentColor;
 }
 
 @media (max-width: 600px) {
