@@ -17,6 +17,7 @@ const errorOwner = document.getElementById('error-owner');
 const starterButtons = document.querySelectorAll('.starter-btn');
 
 function init() {
+    console.log('Init');
     loadPets();
     setupEventListeners();
     render();
@@ -25,6 +26,7 @@ function init() {
 function loadPets() {
     try {
         const data = localStorage.getItem(STORAGE_KEY);
+        console.log('LocalStorage data:', data);
         if (!data) {
             pets = [];
             return;
@@ -35,6 +37,7 @@ function loadPets() {
             return;
         }
         pets = parsed;
+        console.log('Loaded pets:', pets);
     } catch (e) {
         console.error('Error loading pets:', e);
         pets = [];
@@ -42,6 +45,7 @@ function loadPets() {
 }
 
 function savePets() {
+    console.log('Saving pets:', pets);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(pets));
 }
 
@@ -50,6 +54,7 @@ function setupEventListeners() {
 
     starterButtons.forEach(button => {
         button.addEventListener('click', () => {
+            console.log('Starter click:', button.dataset.creature);
             selectCreature(button.dataset.creature);
         });
     });
@@ -65,16 +70,20 @@ function selectCreature(creature) {
 
 function handleFormSubmit(e) {
     e.preventDefault();
+    console.log('Form submit');
     const name = petNameInput.value.trim();
     const owner = petOwnerInput.value.trim();
+    console.log('Form values:', { name, owner, selectedCreature });
     let isValid = true;
     errorName.textContent = '';
     errorOwner.textContent = '';
     if (name.length < 1 || name.length > 24) {
+        console.log('Invalid name');
         errorName.textContent = 'Give this pet a name.';
         isValid = false;
     }
     if (owner.length < 1 || owner.length > 24) {
+        console.log('Invalid owner');
         errorOwner.textContent = 'Give this pet an owner label.';
         isValid = false;
     }
@@ -87,6 +96,7 @@ function handleFormSubmit(e) {
         color: CREATURES[selectedCreature].color,
         createdAt: new Date().toISOString()
     };
+    console.log('New pet:', newPet);
     pets.unshift(newPet);
     savePets();
     render();
@@ -95,6 +105,7 @@ function handleFormSubmit(e) {
 }
 
 function render() {
+    console.log('Render');
     if (pets.length === 0) {
         renderEmptyShelf();
     } else {
