@@ -66,6 +66,11 @@ function selectCreature(creature) {
     starterButtons.forEach(btn => {
         const isSelected = btn.dataset.creature === creature;
         btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+        if (isSelected) {
+            btn.style.borderColor = CREATURES[creature].color;
+        } else {
+            btn.style.borderColor = 'transparent';
+        }
     });
 }
 
@@ -122,40 +127,23 @@ function renderEmptyShelf() {
             <p>Make one little creature to get the household started.</p>
         </div>
     `;
-    const heading = document.getElementById('shelf-heading');
-    if (heading) {
-        heading.textContent = 'THE SHELF';
-    }
-    const countLine = document.getElementById('shelf-count-line');
-    if (countLine) {
-        countLine.remove();
-    }
 }
 
 function renderShelf() {
-    const heading = document.getElementById('shelf-heading');
-    if (heading) {
-        heading.textContent = 'THE HOUSEHOLD';
-    }
     const count = pets.length;
     const countText = count === 1 ? '1 odd pet lives here.' : `${count} odd pets live here.`;
-    let countLine = document.getElementById('shelf-count-line');
-    if (!countLine) {
-        countLine = document.createElement('p');
-        countLine.id = 'shelf-count-line';
-        countLine.className = 'subtitle';
-        heading.parentNode.insertBefore(countLine, heading.nextSibling);
-    }
-    countLine.textContent = countText;
-
-    petShelf.innerHTML = pets.map(pet => `
-        <div class="pet-tile" style="border-left: 10px solid ${pet.color}">
-            <h4>${escapeHTML(pet.name)}</h4>
-            <p class="pet-meta">${escapeHTML(pet.creature)} · ${escapeHTML(pet.owner)}</p>
-            <p class="pet-phrase">${CREATURES[pet.creature].phrase}</p>
-            <p class="pet-date">Arrived today.</p>
-        </div>
-    `).join('');
+    petShelf.innerHTML = `
+        <h2 id="shelf-heading" class="headline">THE HOUSEHOLD</h2>
+        <p id="shelf-count-line" class="subtitle">${countText}</p>
+        ${pets.map(pet => `
+            <div class="pet-tile" style="border-left: 10px solid ${pet.color}">
+                <h4>${escapeHTML(pet.name)}</h4>
+                <p class="pet-meta">${escapeHTML(pet.creature)} · ${escapeHTML(pet.owner)}</p>
+                <p class="pet-phrase">${CREATURES[pet.creature].phrase}</p>
+                <p class="pet-date">Arrived today.</p>
+            </div>
+        `).join('')}
+    `;
 }
 
 function escapeHTML(str) {
