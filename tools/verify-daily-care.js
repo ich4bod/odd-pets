@@ -31,17 +31,9 @@ const { chromium } = require('playwright-core');
     // Assert tile exists
     const tile = page.locator('.pet-tile').filter({ hasText: 'Pip' }).first();
     await tile.waitFor({ state: 'visible', timeout: 10000 });
-    console.log('Found tile for Pip');
-
-    const allTiles = await page.locator('.pet-tile').all();
-    console.log(`Found ${allTiles.length} pet tiles`);
-    for (const t of allTiles) {
-      console.log(`Tile text: ${await t.innerText()}`);
-    }
 
     // 2. Click 'Give a snack'
     const snackBtn = tile.locator('button.pet-care-btn');
-    console.log('Looking for snack button...');
     await snackBtn.waitFor({ state: 'visible', timeout: 5000 });
     await snackBtn.click();
 
