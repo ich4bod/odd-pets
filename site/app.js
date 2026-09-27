@@ -80,7 +80,7 @@ function handleFormSubmit(e) {
     }
     if (!isValid) return;
     const newPet = {
-        id: crypto.randomUUID(),
+        id: Math.random().toString(36).substring(2, 11),
         name: name,
         owner: owner,
         creature: selectedCreature,
