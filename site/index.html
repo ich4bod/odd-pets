@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Odd Pets</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,8 +11,13 @@
         <p>A shelf for the small creatures your household keeps finding.</p>
         <div class="badge">Stored on this device</div>
     </header>
-    <main id="pet-shelf">
-        <!-- Pets will appear here -->
+    <main>
+        <div id="pet-shelf"></div>
+        <form id="pet-form">
+            <input type="text" id="pet-name" placeholder="Pet name">
+            <input type="text" id="pet-owner" placeholder="Owner">
+            <button type="submit">Put on the shelf</button>
+        </form>
     </main>
     <script src="app.js"></script>
 </body>
