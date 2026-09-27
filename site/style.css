@@ -1,5 +1,234 @@
+:root {
+    --bg-color: #FFF8EC;
+    --ink-color: #243042;
+    --muted-color: #667085;
+    --card-bg: #FFFFFF;
+    --card-outline: #E9D9BE;
+    --moth-color: #F6B44C;
+    --frog-color: #77C66E;
+    --blob-color: #B58AE8;
+}
+
 body {
-    background-color: #FFF8EC;
-    color: #243042;
-    font-family: sans-serif;
+    background-color: var(--bg-color);
+    color: var(--ink-color);
+    font-family: system-ui, -apple-system, sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.masthead {
+    width: 100%;
+    max-width: 960px;
+    padding: 2rem 1rem;
+    position: relative;
+}
+
+.masthead-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.title {
+    font-size: 42px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.subtitle {
+    color: var(--muted-color);
+    margin: 0.5rem 0 0 0;
+}
+
+.badge {
+    position: absolute;
+    right: 1rem;
+    top: 2rem;
+    background-color: var(--ink-color);
+    color: var(--bg-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+}
+
+main {
+    width: 100%;
+    max-width: 960px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0 1rem 2rem 1rem;
+}
+
+#pet-shelf {
+    width: 100%;
+}
+
+.empty-shelf-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-outline);
+    padding: 2rem;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    color: var(--muted-color);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.headline {
+    font-size: 1.5rem;
+    margin: 0 0 1rem 0;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-outline);
+    padding: 2rem;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.card-heading {
+    margin-top: 0;
+    font-size: 1.25rem;
+}
+
+.field {
+    margin-bottom: 1.5rem;
+}
+
+.field label {
+    display: block;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+.field input {
+    width: 100%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    border: 1px solid var(--card-outline);
+    border-radius: 4px;
+}
+
+.error {
+    color: #d32f2f;
+    font-size: 0.75rem;
+    display: block;
+    margin-top: 0.25rem;
+    min-height: 1em;
+}
+
+.starter-choices {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.starter-btn {
+    background: none;
+    border: 3px solid transparent;
+    padding: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.starter-btn .silhouette {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--card-outline);
+}
+
+.starter-btn .label {
+    text-align: center;
+    font-size: 0.75rem;
+}
+
+.starter-btn[aria-pressed="true"] {
+    border-color: currentColor;
+}
+
+#submit-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--ink-color);
+    color: var(--bg-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.privacy-copy {
+    font-size: 0.75rem;
+    color: var(--muted-color);
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+/* Pet tile */
+.pet-tile {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-outline);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+}
+
+.pet-tile h4 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.pet-tile .pet-meta {
+    color: var(--muted-color);
+    font-size: 0.875rem;
+    margin: 0.25rem 0;
+}
+
+.pet-tile .pet-phrase {
+    font-size: 0.875rem;
+    margin: 0.5rem 0;
+}
+
+.pet-tile .pet-date {
+    font-size: 0.75rem;
+    color: var(--muted-color);
+}
+
+@media (max-width: 600px) {
+    .title {
+        font-size: 34px;
+    }
+    main {
+        flex-direction: column;
+    }
+    .card {
+        max-width: 100%;
+    }
+    .starter-choices {
+        flex-direction: column;
+        align-items: center;
+    }
+    .starter-btn {
+        width: 100%;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 1rem;
+    }
 }

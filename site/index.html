@@ -2,23 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Odd Pets</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Odd Pets</h1>
-        <p>A shelf for the small creatures your household keeps finding.</p>
-        <div class="badge">Stored on this device</div>
+    <header class="masthead">
+        <div class="masthead-content">
+            <h1 class="title">Odd Pets</h1>
+            <p class="subtitle">A shelf for the small creatures your household keeps finding.</p>
+            <div class="badge">Stored on this device</div>
+        </div>
     </header>
+
     <main>
-        <div id="pet-shelf"></div>
-        <form id="pet-form">
-            <input type="text" id="pet-name" placeholder="Pet name">
-            <input type="text" id="pet-owner" placeholder="Owner">
-            <button type="submit">Put on the shelf</button>
-        </form>
+        <section id="shelf-section">
+            <div id="pet-shelf">
+                <!-- Empty shelf state will be rendered here -->
+            </div>
+        </section>
+
+        <section id="creation-section">
+            <div class="card">
+                <h3 class="card-heading">Meet a new odd pet</h3>
+                <form id="pet-form" novalidate>
+                    <div class="field">
+                        <label for="pet-name">Pet name</label>
+                        <input type="text" id="pet-name" placeholder="Pick something good" maxlength="24">
+                        <span class="error" id="error-name"></span>
+                    </div>
+                    <div class="field">
+                        <label for="pet-owner">Owner</label>
+                        <input type="text" id="pet-owner" placeholder="Whose creature is this?" maxlength="24">
+                        <span class="error" id="error-owner"></span>
+                    </div>
+                    <div class="field">
+                        <label>Choose a starter</label>
+                        <div class="starter-choices">
+                            <button type="button" class="starter-btn" data-creature="Moth" aria-pressed="true">
+                                <span class="silhouette"></span>
+                                <span class="label">Moth<br><small>a night-light collector</small></span>
+                            </button>
+                            <button type="button" class="starter-btn" data-creature="Frog">
+                                <span class="silhouette"></span>
+                                <span class="label">Frog<br><small>a puddle critic</small></span>
+                            </button>
+                            <button type="button" class="starter-btn" data-creature="Blob">
+                                <span class="silhouette"></span>
+                                <span class="label">Blob<br><small>a very small weather system</small></span>
+                            </button>
+                        </div>
+                    </div>
+                    <button type="submit" id="submit-btn">Put on the shelf</button>
+                </form>
+                <p class="privacy-copy">Nothing leaves this browser. Names here are just labels for your household.</p>
+            </div>
+        </section>
     </main>
+
     <script src="app.js"></script>
 </body>
 </html>
