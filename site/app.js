@@ -1,3 +1,4 @@
+console.log('app.js loaded');
 const STORAGE_KEY = 'odd-pets-v1';
 const CREATURES = {
     Moth: { color: '#F6B44C', phrase: 'a night-light collector' },
