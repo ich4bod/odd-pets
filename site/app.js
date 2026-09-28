@@ -6,6 +6,12 @@ const CREATURES = {
     Blob: { color: '#B58AE8', phrase: 'a very small weather system' }
 };
 
+const HABITS = {
+    Moth: 'Moth has begun cataloguing lamps by mood.',
+    Frog: 'Frog now insists every puddle has an accent.',
+    Blob: 'Blob has learned to look bean-shaped on purpose.'
+};
+
 function getTodayKey() {
     const now = new Date();
     return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
@@ -168,50 +174,108 @@ function renderShelf() {
     const countText = count === 1 ? '1 odd pet lives here.' : `${count} odd pets live here.`;
     const todayKey = getTodayKey();
 
-    let petsHtml = '';
+    petShelf.innerHTML = '';
+    
+    const heading = document.createElement('h2');
+    heading.id = 'shelf-heading';
+    heading.className = 'headline';
+    heading.textContent = 'THE HOUSEHOLD';
+    petShelf.appendChild(heading);
+
+    const subtitle = document.createElement('p');
+    subtitle.id = 'shelf-count-line';
+    subtitle.className = 'subtitle';
+    subtitle.textContent = countText;
+    petShelf.appendChild(subtitle);
+
     for (const pet of pets) {
         const hasSnackedToday = pet.lastSnackDay === todayKey;
         
-        let careStripHtml = '';
+        const tile = document.createElement('div');
+        tile.className = 'pet-tile';
+        tile.style.borderLeft = `10px solid ${pet.color}`;
+
+        const name = document.createElement('h4');
+        name.textContent = pet.name;
+        tile.appendChild(name);
+
+        const meta = document.createElement('p');
+        meta.className = 'pet-meta';
+        meta.textContent = pet.creature + ' · ' + pet.owner;
+        tile.appendChild(meta);
+
+        const phrase = document.createElement('p');
+        phrase.className = 'pet-phrase';
+        phrase.textContent = CREATURES[pet.creature].phrase;
+        tile.appendChild(phrase);
+
+        const careStrip = document.createElement('div');
+        careStrip.className = 'pet-care-strip';
         if (!hasSnackedToday) {
-            careStripHtml = `
-                <div class="pet-care-strip">
-                    <span class="pet-care-label">TODAY'S TINY CARE</span>
-                    <p class="pet-care-prompt">Offer one snack. They will remember.</p>
-                    <button class="pet-care-btn" data-pet-id="${pet.id}" style="outline-color: ${pet.color}">Give a snack</button>
-                </div>
-            `;
+            const label = document.createElement('span');
+            label.className = 'pet-care-label';
+            label.textContent = "TODAY'S TINY CARE";
+            careStrip.appendChild(label);
+
+            const prompt = document.createElement('p');
+            prompt.className = 'pet-care-prompt';
+            prompt.textContent = 'Offer one snack. They will remember.';
+            careStrip.appendChild(prompt);
+
+            const btn = document.createElement('button');
+            btn.className = 'pet-care-btn';
+            btn.dataset.petId = pet.id;
+            btn.style.outlineColor = pet.color;
+            btn.textContent = 'Give a snack';
+            careStrip.appendChild(btn);
         } else {
             const results = {
                 Moth: 'Moth has placed the crumb under a lamp for later.',
                 Frog: 'Frog says this snack has excellent bounce.',
                 Blob: 'Blob is now shaped slightly more like a bean.'
             };
-            careStripHtml = `
-                <div class="pet-care-strip">
-                    <span class="pet-care-label">TODAY'S TINY CARE</span>
-                    <p class="pet-care-result">${results[pet.creature]}</p>
-                    <p class="pet-care-count">${pet.snacks} snack${pet.snacks === 1 ? '' : 's'} remembered.</p>
-                </div>
-            `;
+            const label = document.createElement('span');
+            label.className = 'pet-care-label';
+            label.textContent = "TODAY'S TINY CARE";
+            careStrip.appendChild(label);
+
+            const result = document.createElement('p');
+            result.className = 'pet-care-result';
+            result.textContent = results[pet.creature];
+            careStrip.appendChild(result);
+
+            const count = document.createElement('p');
+            count.className = 'pet-care-count';
+            count.textContent = pet.snacks + ' snack' + (pet.snacks === 1 ? '' : 's') + ' remembered.';
+            careStrip.appendChild(count);
+        }
+        tile.appendChild(careStrip);
+
+        if (pet.snacks >= 3) {
+            const habitSection = document.createElement('section');
+            habitSection.className = 'pet-habit';
+            habitSection.style.borderLeftColor = pet.color;
+
+            const eyebrow = document.createElement('div');
+            eyebrow.className = 'pet-habit-eyebrow';
+            eyebrow.textContent = 'A SMALL HABIT';
+            habitSection.appendChild(eyebrow);
+
+            const sentence = document.createElement('div');
+            sentence.className = 'pet-habit-sentence';
+            sentence.textContent = HABITS[pet.creature];
+            habitSection.appendChild(sentence);
+
+            tile.appendChild(habitSection);
         }
 
-        petsHtml += `
-            <div class="pet-tile" style="border-left: 10px solid ${pet.color}">
-                <h4>${escapeHTML(pet.name)}</h4>
-                <p class="pet-meta">${escapeHTML(pet.creature)} · ${escapeHTML(pet.owner)}</p>
-                <p class="pet-phrase">${CREATURES[pet.creature].phrase}</p>
-                ${careStripHtml}
-                <p class="pet-date">Arrived today.</p>
-            </div>
-        `;
-    }
+        const date = document.createElement('p');
+        date.className = 'pet-date';
+        date.textContent = 'Arrived today.';
+        tile.appendChild(date);
 
-    petShelf.innerHTML = `
-        <h2 id="shelf-heading" class="headline">THE HOUSEHOLD</h2>
-        <p id="shelf-count-line" class="subtitle">${countText}</p>
-        ${petsHtml}
-    `;
+        petShelf.appendChild(tile);
+    }
 }
 
 function escapeHTML(str) {

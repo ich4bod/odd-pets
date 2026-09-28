@@ -20,6 +20,7 @@ body {
 }
 
 .masthead {
+    box-sizing: border-box;
     width: 100%;
     max-width: 960px;
     padding: 2rem 1rem;
@@ -55,6 +56,7 @@ body {
 }
 
 main {
+    box-sizing: border-box;
     width: 100%;
     max-width: 960px;
     display: flex;
@@ -89,6 +91,7 @@ main {
 }
 
 .card {
+    box-sizing: border-box;
     background-color: var(--card-bg);
     border: 1px solid var(--card-outline);
     padding: 2rem;
@@ -232,6 +235,27 @@ main {
 
 .pet-care-btn:focus {
     outline: 3px solid currentColor;
+}
+
+.pet-habit {
+    border-left: 3px solid;
+    padding: 10px 12px;
+    margin-top: 10px;
+    border-radius: 10px;
+    background-color: #FFF8EC;
+}
+
+.pet-habit-eyebrow {
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 0.08em;
+    color: #667085;
+    text-transform: uppercase;
+}
+
+.pet-habit-sentence {
+    font-size: 14px;
+    color: #243042;
 }
 
 @media (max-width: 600px) {
