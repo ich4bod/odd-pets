@@ -12,6 +12,12 @@ const HABITS = {
     Blob: 'Blob has learned to look bean-shaped on purpose.'
 };
 
+const SHELF_TITLES = {
+    Moth: 'LAMP LIBRARIAN',
+    Frog: 'PUDDLE DIALECTICIAN',
+    Blob: 'BEAN APPRENTICE'
+};
+
 function getTodayKey() {
     const now = new Date();
     return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
@@ -198,6 +204,15 @@ function renderShelf() {
         const name = document.createElement('h4');
         name.textContent = pet.name;
         tile.appendChild(name);
+
+        const normalizedSnacks = Number(pet.snacks) || 0;
+        if (normalizedSnacks >= 6) {
+            const title = document.createElement('span');
+            title.className = 'pet-title';
+            title.style.backgroundColor = pet.color;
+            title.textContent = SHELF_TITLES[pet.creature];
+            tile.appendChild(title);
+        }
 
         const meta = document.createElement('p');
         meta.className = 'pet-meta';
